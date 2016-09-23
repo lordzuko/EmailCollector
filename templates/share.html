@@ -1,5 +1,61 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+
+{% block jquery %}
+    $signUpCount ={{ count }};
+
+        //$(".progress-bar").css("width","80%").attr("aria-valuenow","80%").text("80%");
+    $arr = [
+            {
+                'id': "#count5",
+                'from' : 1,
+                'to':5
+            },
+            {
+                'id': "#count15",
+                'from' : 6,
+                'to':15
+            },
+            {
+                'id': "#count25",
+                'from' : 16,
+                'to':25
+            },
+            {
+                'id': "#count50",
+                'from' : 26,
+                'to':50
+            }
+    ];
+
+    $i = 0;
+    while($i < 4) {
+        $newPercent =0;
+        $m = $arr[$i]["from"];
+        $n = $arr[$i]["to"];
+
+        if($signUpCount > 0) {
+            $x= $n-$m+1;
+            if($signUpCount >= $x){
+                $newPercent=100;
+                $signUpCount-=$x;
+            }else{
+                $newPercent=$signUpCount/$x * 100;
+                $signUpCount=0;
+            }
+
+            $newPercent = Math.trunc( $newPercent )
+            if( $newPercent == 100 ){
+                $($arr[$i]["id"]).css("width", $newPercent + "%").attr("aria-valuenow", $newPercent + "%").text("Completed");
+            }else{
+                $($arr[$i]["id"]).css("width", $newPercent + "%").attr("aria-valuenow", $newPercent + "%").text($newPercent + "%");
+            }
+        }
+        $i++;
+    }
+{% endblock %}
+
+
 {% block content %}
 
     {% include 'navbar.html' %}
@@ -7,19 +63,137 @@
     <div class="jumbotron" >
       <div class="container">
        <div class="row">
-        <div class="col-md-6 pull-right">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-success btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        <div class="col-md-6 pull-right" style="text-align: center;">
+            <h1>
+                <i class="fa fa-share-alt " aria-hidden="true"></i><br/>
+            </h1>
+            <h1>Invite Friends &amp; Earn Rewards</h1>
+            <p>Share your unique link below via Email, Facebook, Twitter, Reddit or LinkedIn to
+                earn rewards.</p>
+            <div class="well ">{{ ref_url }}</div>
+            <div>
+                <p style="font-size: medium">Share</p>
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ ref_url }}">
+                    <i class="fa fa-facebook-square fa-4x" style="color:#3b5998"></i>
+                </a>
+
+                <a href="https://twitter.com/home?status=Hello%20this%20is%20a%20%23tag%20that%20I%20want%20to%20share%20at%20some%20point.%20Tweet%20%40lordzuko2.%20{{ ref_url }}" >
+
+                    <i class="fa fa-twitter-square fa-4x" style="color:#4099FF"></i>
+                </a>
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ ref_url}}&title=Hello%20this%20this%20is%20a%20title.&summary=Hello%20this%20this%20is%20a%20title.&source={{ ref_url }}" >
+                    <i class="fa fa-linkedin-square fa-4x" style="color:#007bb6"></i>
+                </a>
+                <a href="http://www.reddit.com/submit?url={{ ref_url }}&title=Hello%20this%20this%20is%20a%20title." >
+                    <i class="fa fa-reddit-square fa-4x" style="color:#900020"></i>
+                </a>
+                <a href='https://plus.google.com/share?url={{ ref_url }}' >
+                    <i class="fa fa-google-plus-square fa-4x" style="color:#D34836"></i>
+                </a>
+
+
+            </div>
         </div>
         <div class="col-md-6 pull-left">
           <img src="{% static 'img/launch.jpg' %}" class="img-responsive img-rounded">
         </div>
        </div>
-      </div>
 
+      </div>
     </div>
-<h1>{{ count }}</h1>
-<h2>{{ ref_id }}</h2>
-<h3>{{ ref_url }}</h3>
+    <div class="container">
+    <div class="row" style="text-align: center">
+              <div class="col-md-3">
+                  <h3>5 Joined</h3>
+
+                  <div class="progress">
+                      <div class="progress-bar" id="count5" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          0%
+                      </div>
+                  </div>
+                  <h4>Reward Name</h4>
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <hr/>
+                  <span style="text-align: left !important;">
+                  <h4>Rewards Include:</h4>
+                  <ul>
+                      <li>Reward 1</li>
+                      <li>Reward 2</li>
+                  </ul>
+                  </span>
+                  <hr/>
+              </div>
+
+              <div class="col-md-3">
+                  <h3>15 Joined</h3>
+
+                  <div class="progress">
+                      <div class="progress-bar" id="count15" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                            0%
+                      </div>
+                  </div>
+                  <h4>Reward Name</h4>
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <hr/>
+
+                  <span style="text-align: left !important;">
+                  <h4>Rewards Include:</h4>
+                  <ul>
+                      <li>Reward 1</li>
+                      <li>Reward 2</li>
+                  </ul>
+                  </span>
+                  <hr/>
+              </div>
+
+              <div class="col-md-3">
+                  <h3>25 Joined</h3>
+
+                  <div class="progress">
+                      <div class="progress-bar" id="count25" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          0%
+                      </div>
+                  </div>
+                  <h4>Reward Name</h4>
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <hr/>
+                  <span style="text-align: left !important;">
+                  <h4>Rewards Include:</h4>
+                  <ul>
+                      <li>Reward 1</li>
+                      <li>Reward 2</li>
+
+                  </ul>
+                  </span>
+                  <hr/>
+              </div>
+
+              <div class="col-md-3">
+                  <h3>50 Joined</h3>
+
+                  <div class="progress">
+                      <div class="progress-bar" id="count50" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                          0%
+                      </div>
+                  </div>
+
+                  <h4>Reward Name</h4>
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <img src="https://cfe-static.s3.amazonaws.com/static/img/ico/apple-touch-icon-72-precomposed.png" />
+                  <hr/>
+                  <span style="text-align: left !important;">
+                  <h4>Rewards Include:</h4>
+                  <ul>
+                      <li>Reward 1</li>
+                      <li>Reward 2</li>
+
+                  </ul>
+                  </span>
+                  <hr/>
+              </div>
+          </div>
+        </div>
+
 {% endblock %}
