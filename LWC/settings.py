@@ -112,7 +112,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-SHARE_URL = "http://127.0.01/?ref="
+SHARE_URL = "http://127.0.0.1:8000/?ref="
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
